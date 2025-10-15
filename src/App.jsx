@@ -124,8 +124,9 @@ export default function FastexOrderBook() {
     // --- Main Component Render ---
 
     const spread = calculateSpread();
-    const asksToRender = orderBook?.asks?.slice(0, 30).reverse() || [];
-    const bidsToRender = orderBook?.bids?.slice(0, 30) || [];
+    const asksToRender = orderBook?.asks?.slice().reverse() || [];
+    const bidsToRender = orderBook?.bids || [];
+
 
     return (
         <div className="orderbook-app">
@@ -219,9 +220,7 @@ export default function FastexOrderBook() {
                                 </tbody>
                             </table>
                         </div>
-                        {orderBook?.asks?.length > 30 && (
-                            <p className="table-footer">... {orderBook.asks.length - 30} more orders hidden for display clarity</p>
-                        )}
+
                     </div>
 
                     {/* Bids (Buy Orders) Column */}
@@ -269,9 +268,6 @@ export default function FastexOrderBook() {
                                 </tbody>
                             </table>
                         </div>
-                        {orderBook?.bids?.length > 30 && (
-                            <p className="table-footer">... {orderBook.bids.length - 30} more orders hidden for display clarity</p>
-                        )}
                     </div>
 
                 {/* Detailed Summary Stats */}
